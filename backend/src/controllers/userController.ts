@@ -1,9 +1,10 @@
 import { Context } from "hono";
-import { signInParams, signInSchema, signUpParams, signUpSchema } from "../zod/allZodSchemas"
 import { Jwt } from "hono/utils/jwt";
 import { ResponseCode } from "../responseCodes/responseCodes";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { signInParams, signInSchema, signUpParams, signUpSchema } from "@rishit1275/blogging-website-package";
+
 
 // For signing up
 export async function signUpController(c:Context) {

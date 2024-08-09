@@ -1,8 +1,9 @@
 import { Context } from "hono";
 import { ResponseCode } from "../responseCodes/responseCodes";
-import { createBlogSchema, blogParams } from "../zod/allZodSchemas";
+
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
+import { blogParams, createBlogSchema } from "@rishit1275/blogging-website-package";
 
 const selectingStuff = {
     id: true,
@@ -23,6 +24,7 @@ const selectingStuff = {
     }
 }
 
+createBlogSchema
 // Creating a blog
 export async function creatingBlog(c: Context) {
     try {
