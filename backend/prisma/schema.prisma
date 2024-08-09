@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id          String          @id @default(uuid())
+  name        String
+  email       String          @unique
+  password    String
+  posts       Blog[]
+}
+
+model Blog {
+  id          String          @id @default(uuid())
+  title       String
+  content     String
+  published   Boolean         @default(false)
+  created     DateTime        @default(now())
+  authorId    String
+  author      User            @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  tags        Tag[]           @relation("BlogTags")
+}
+
+model Tag {
+  id          String        @id @default(uuid())
+  name        String        @unique
+  blogs       Blog[]        @relation("BlogTags")
+}
