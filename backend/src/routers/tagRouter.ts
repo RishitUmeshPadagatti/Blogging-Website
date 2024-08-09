@@ -1,9 +1,14 @@
 import { Hono } from "hono";
-import { getAllTags, getPostsByASpecificTag } from "../controllers/tagController";
+import { getAllTags, getBlogsByASpecificTag } from "../controllers/tagController";
+import { authMiddleware } from "../middleware/authMiddleware";
 
 const tagRouter = new Hono()
+tagRouter.use("*", authMiddleware)
 
-tagRouter.get("/getpost/:tag", getPostsByASpecificTag)
-tagRouter.post("/tags", getAllTags)
+// Getting all blogs by their tag name
+tagRouter.get("/getblogs/:tagname", getBlogsByASpecificTag)
+
+// Getting all the tags
+tagRouter.get("/tags", getAllTags)
 
 export default tagRouter
