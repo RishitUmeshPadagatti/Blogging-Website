@@ -1,0 +1,10 @@
+{
+    "msg": "User Created Successfully",
+    "success": true,
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijk5YzQxNzkyLWQ1MTEtNDM0NC1hZjZhLTk3ODFiMjNlNWYzNCIsIm5hbWUiOiJSaXNoaXQiLCJlbWFpbCI6InJpc2hpdHVtZXNocGFkYWdhdHRpQGdtYWlsLmNvbSJ9.GB4NG9cczsP52hvty6fXhr0wg0WQpaNfT46qoyipltI",
+    "user": {
+        "id": "99c41792-d511-4344-af6a-9781b23e5f34",
+        "name": "Rishit",
+        "email": "rishitumeshpadagatti@gmail.com"
+    }
+}
