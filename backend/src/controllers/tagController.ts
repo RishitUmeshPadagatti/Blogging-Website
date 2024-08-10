@@ -44,10 +44,13 @@ export async function getBlogsByASpecificTag(c:Context) {
             },
             select: {
                 blogs: {
+                    where: {
+                        published: true,
+                    },
                     select: selectingStuff,
                 },
             },
-        }))[0].blogs;
+        }))[0].blogs
 
         if (result.length == 0){
             c.json({msg: "No Blogs"}, ResponseCode.badRequest)

@@ -1,0 +1,22 @@
+[
+    {
+        "id": "8c58d296-c0d7-45c5-a28d-3e4421f85719",
+        "name": "AI"
+    },
+    {
+        "id": "d1fd96cc-d168-4fd2-a2bf-1d2f80c1acee",
+        "name": "Health"
+    },
+    {
+        "id": "706e7da4-1064-4eac-9f4d-485201dbfc59",
+        "name": "Productivity"
+    },
+    {
+        "id": "b009d346-efda-4f70-9c53-3d37867ae656",
+        "name": "Technology"
+    },
+    {
+        "id": "8c015c31-5b0b-43c3-a22f-0e32938a1c98",
+        "name": "Workplace"
+    }
+]
