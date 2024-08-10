@@ -13,8 +13,8 @@ function App() {
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Suspense fallback={"Loading..."}><Dashboard /></Suspense>} />
           <Route path='/signuporsignin' element={<Suspense fallback={"Loading..."}><SignInAndSignUp /></Suspense>} />
+          <Route path='/' element={<Suspense fallback={"Loading..."}><Dashboard /></Suspense>} />
           <Route path='/blog' element={<Suspense fallback={"Loading..."}><Blog /></Suspense>} />
         </Routes>
       </BrowserRouter>

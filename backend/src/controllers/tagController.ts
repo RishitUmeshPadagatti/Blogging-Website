@@ -67,10 +67,17 @@ export async function getAllTags(c:Context) {
         }).$extends(withAccelerate());
         
         const result = await prisma.tag.findMany({
+            where: {
+                blogs: {
+                    some: {
+                        published: true
+                    }
+                }
+            },
             orderBy: {
-                name: "asc"
+                name: 'asc'
             }
-        })
+        });
 
         if (result.length == 0){
             return c.json({msg: "No tags", success: false}, ResponseCode.badRequest)

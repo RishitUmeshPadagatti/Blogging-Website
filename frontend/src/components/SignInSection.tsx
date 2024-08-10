@@ -33,8 +33,12 @@ export default function SignInSection({ toggleForm }: { toggleForm: () => void }
 
         try {
             const result = await axios.post(`${serverLocation}/user/signin`, receivedSignInInput)
-            console.log(result.data)
             localStorage.setItem("Authorization", `Bearer ${result.data.token}`)
+            localStorage.setItem("UserDetails", JSON.stringify({
+                id: result.data.user.id,
+                name: result.data.user.name,
+                email: result.data.user.email
+            }))
             setIsSubmitting(false)
             navigate("/")
         } catch (error) {

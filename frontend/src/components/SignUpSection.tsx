@@ -5,6 +5,7 @@ import axios from "axios"
 import { useRecoilValue } from "recoil"
 import { serverLocationAtom } from "../atom/atoms"
 import { useNavigate } from "react-router-dom"
+import { capitalizedName } from "../functions/capitalizedName"
 
 export default function SignUpSection({ toggleForm }: { toggleForm: () => void }) {
     const serverLocation = useRecoilValue(serverLocationAtom)
@@ -14,13 +15,6 @@ export default function SignUpSection({ toggleForm }: { toggleForm: () => void }
     const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
-
-    const capitalizedName = (s: string) => {
-        return s
-            .split(' ')
-            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(' ');
-    }
 
     const handleSubmit = async () => {
         setIsSubmitting(true);
@@ -42,8 +36,13 @@ export default function SignUpSection({ toggleForm }: { toggleForm: () => void }
 
         try {
             const result = await axios.post(`${serverLocation}/user/signup`, receivedSignUpInput)
-            console.log(result.data)
-            localStorage.setItem("Authorization", `Bearer ${result.data.token}`)
+            localStorage.setItem("Authorization", `Bearer ${result.data.token}`);
+            console.log(result.data.user)
+            localStorage.setItem("UserDetails", JSON.stringify({
+                id: result.data.user.id,
+                name: result.data.user.name,
+                email: result.data.user.email
+            }))
             setIsSubmitting(false)
             navigate("/")
         } catch (error) {
