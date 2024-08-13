@@ -1,4 +1,4 @@
-[
+export const tagsResponse = [
     {
         "id": "8c58d296-c0d7-45c5-a28d-3e4421f85719",
         "name": "AI"

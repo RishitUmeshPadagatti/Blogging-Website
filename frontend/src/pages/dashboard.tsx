@@ -3,30 +3,21 @@ import { useEffect, useState } from "react";
 import { serverLocationAtom } from "../atom/atoms";
 import { useRecoilValue } from "recoil";
 import { PenIcon } from "../components/PenIcon";
-import { profileInitials } from "../functions/profileInitials";
 import { formatDate } from "../functions/formatDate";
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from "react-router-dom";
+import { BlogComponent } from "../components/BlogComponent";
+import { Avatar } from "../components/Avatar";
+import { Blog, Tag } from "../interfaces/interface";
+import { profileInitials } from "../functions/profileInitials";
+import { TagsNavbar } from "../components/TagsNavbar";
 
-interface Tag {
-  id: string,
-  name: string
-}
 
-function useBlogs(n: number): {
-  id: string,
-  title: string,
-  content: string,
-  published: boolean,
-  created: string,
-  author: {
-    name: string
-  },
-  authorId: string,
-  tags: Tag[]
-} {
-  const [blogs, setBlogs] = useState([])
-  const [loading, setLoading] = useState(true)
+function useBlogs(n: number): [Blog[], boolean] {
+  const [blogs, setBlogs] = useState<Blog[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
   const serverLocation = useRecoilValue(serverLocationAtom)
+  const navigate = useNavigate()
 
   const getData = async () => {
     try {
@@ -38,6 +29,8 @@ function useBlogs(n: number): {
       setBlogs(result.data.blogs)
     } catch (error) {
       console.error("Failed to fetch data", error)
+      localStorage.clear()
+      navigate("/signuporsignin")
     } finally {
       setLoading(false)
     }
@@ -58,10 +51,11 @@ function useBlogs(n: number): {
   return [blogs, loading]
 }
 
-function useTags(n: number): Tag[] {
-  const [tags, setTags] = useState([])
-  const [loading, setLoading] = useState(true)
+function useTags(n: number): [Tag[], boolean] {
+  const [tags, setTags] = useState<Tag[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
   const serverLocation = useRecoilValue(serverLocationAtom)
+  const navigate = useNavigate()
 
   const getData = async () => {
     try {
@@ -73,6 +67,8 @@ function useTags(n: number): Tag[] {
       setTags(result.data.tags)
     } catch (error) {
       console.error("Failed to fetch data", error)
+      localStorage.clear()
+      navigate("/signuporsignin")
     } finally {
       setLoading(false)
     }
@@ -102,33 +98,15 @@ export default function Dashboard() {
   return (
     <div className="flex flex-col w-full min-h-screen">
       <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
-        <nav className="flex-col hidden gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-          <a className="font-bold">
-            For you
-          </a>
-          <a className="text-gray-500">
-            JavaScript
-          </a>
-          <a className="text-gray-500">
-            Life
-          </a>
-          <a className="text-gray-500">
-            Business
-          </a>
-          <a className="text-gray-500">
-            Cryptocurrency
-          </a>
-          <a className="text-gray-500">
-            Psychology
-          </a>
-        </nav>
+        <TagsNavbar/>
+
         <div className="flex items-center ml-auto gap-2">
           <button className="p-2 rounded-full hover:bg-gray-200">
             <PenIcon className="h-5 w-5" />
             <span className="sr-only">Write</span>
           </button>
           <button className="p-2 rounded-full hover:bg-gray-200">
-            <Avatar initials="BL" />
+            <Avatar initials={profileInitials((JSON.parse(localStorage.getItem("UserDetails") || "")).name)} />
           </button>
         </div>
       </header>
@@ -147,49 +125,6 @@ export default function Dashboard() {
         })}
 
       </main>
-    </div>
-  );
-}
-
-interface BlogComponentProps {
-  title: string;
-  content: string;
-  author: string;
-  tags: Tag[];
-  created: string;
-}
-
-const BlogComponent: React.FC<BlogComponentProps> = ({ title, content, author, tags, created }) => {
-  const currentTag: string = "AI"
-
-  return (
-    <div className="flex gap-2 md:gap-6 rounded px-3 py-2 ">
-      <div>
-        <Avatar initials={profileInitials(author)} />
-      </div>
-      <div className="space-y-2 md:space-y-3">
-        <p className="text-sm font-medium">{author}</p>
-        <h2 className="text-xl font-bold">{title}</h2>
-        <p className="text-gray-500">{content}</p>
-        <div className="flex items-center gap-2 md:gap-4 text-sm text-gray-500 cursor-default flex-wrap">
-          <div>{created}</div>
-            {tags.map((element) => {
-              return <div key={uuidv4()} className={`px-3 py-1 rounded-full whitespace-nowrap ${currentTag==element.name ? 'bg-black text-white' : 'bg-gray-200 text-gray-800'}`}>{element.name}</div>
-            })}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-interface AvatarProps {
-  initials: string;
-}
-
-const Avatar: React.FC<AvatarProps> = ({ initials }) => {
-  return (
-    <div className="bg-gray-200 cursor-pointer rounded-full h-[40px] w-[40px] flex items-center justify-center text-[18px] font-semibold text-gray-800">
-      {initials}
     </div>
   );
 }
