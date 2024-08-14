@@ -3,7 +3,7 @@ import { useRef, useState } from "react"
 import { errorToast } from "./ToastComponents"
 import axios from "axios"
 import { useRecoilValue } from "recoil"
-import { serverLocationAtom } from "../atom/atoms"
+import { serverLocationAtom } from "../../atom/atoms"
 import { useNavigate } from "react-router-dom"
 
 export default function SignInSection({ toggleForm }: { toggleForm: () => void }) {

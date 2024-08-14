@@ -1,4 +1,4 @@
-import quotes from "../assets/quotes";
+import quotes from "../../assets/quotes";
 
 export default function RandomQuote(){
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];

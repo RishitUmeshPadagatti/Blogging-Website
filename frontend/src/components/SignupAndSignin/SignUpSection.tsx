@@ -3,9 +3,9 @@ import { useRef, useState } from "react"
 import { errorToast } from "./ToastComponents"
 import axios from "axios"
 import { useRecoilValue } from "recoil"
-import { serverLocationAtom } from "../atom/atoms"
+import { serverLocationAtom } from "../../atom/atoms"
 import { useNavigate } from "react-router-dom"
-import { capitalizedName } from "../functions/capitalizedName"
+import { capitalizedName } from "../../functions/capitalizedName"
 
 export default function SignUpSection({ toggleForm }: { toggleForm: () => void }) {
     const serverLocation = useRecoilValue(serverLocationAtom)

@@ -24,6 +24,15 @@ export interface Blog {
     tags: Tag[];
 }
 
+export interface CapsuleProps {
+    name: string,
+    currentTag: string
+}
+
 export interface AvatarProps {
     initials: string;
 }
+
+export interface TagsNavbarProps {
+    tags: Tag[]
+  }
