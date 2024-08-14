@@ -1,4 +1,7 @@
-export function PenIcon(props) {
+import { SVGProps } from "react";
+import { JSX } from "react/jsx-runtime";
+
+export function PenIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
     return (
       <svg
         {...props}

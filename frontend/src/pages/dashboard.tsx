@@ -29,6 +29,7 @@ function useTags(n: number): [Tag[], boolean] {
       console.error("Failed to fetch data", error)
       localStorage.clear()
       navigate("/signuporsignin")
+      return;
     } finally {
       setLoading(false)
     }
@@ -88,9 +89,6 @@ function useBlogs(n: number): [Blog[], boolean] {
 }
 
 export default function Dashboard() {
-  const [tags, tagsLoading] = useTags(100)
-  const [blogs, blogsLoading] = useBlogs(100)
-
   return (
     <div className="flex flex-col w-full min-h-screen">
       <nav className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
@@ -107,10 +105,10 @@ export default function Dashboard() {
         </div>
       </nav>
       <div>
-        <TagsNavbar tags={tags}/>
+        <TagsNavbar/>
       </div>
 
-      <MainBlogComponent blogs={blogs}/>
+      <MainBlogComponent/>
       
     </div>
   );

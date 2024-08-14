@@ -25,14 +25,16 @@ export const createBlogSchema = z.object({
         .max(80, "Title should be at most 80 characters long"),
     content: z.string()
         .min(5, "Content should be at least 5 characters long"),
-    tags: z.array(z.string().min(1, "Tag cannot be empty"))
+    tags: z.array(z.string()
+        .min(1, "Tag cannot be empty")
+        .regex(/^\w+$/, "Each tag must be a single word without spaces"))
         .max(10, "You can specify at most 10 tags")
 });
 export type blogParams = z.infer<typeof createBlogSchema>
 
 export const tagSchema = z.object({
     name: z.string()
-      .min(1, "Tag name cannot be empty")
-      .max(30, "Tag name should be at most 30 characters long")
+        .min(1, "Tag name cannot be empty")
+        .max(30, "Tag name should be at most 30 characters long")
 });
 export type tagParams = z.infer<typeof tagSchema>

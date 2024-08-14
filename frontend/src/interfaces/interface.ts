@@ -25,8 +25,7 @@ export interface Blog {
 }
 
 export interface CapsuleProps {
-    name: string,
-    currentTag: string
+    name: string
 }
 
 export interface AvatarProps {
@@ -35,4 +34,4 @@ export interface AvatarProps {
 
 export interface TagsNavbarProps {
     tags: Tag[]
-  }
+}
