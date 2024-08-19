@@ -1,55 +1,14 @@
-import { useEffect, useRef, useState } from "react";
-import { Tag } from "../../interfaces/interface";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { currentTagAtom, serverLocationAtom } from "../../atom/atoms";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";;
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
+import { currentTagAtom, tagsAtom } from "../../atom/atoms";
 import ReactLoading from 'react-loading';
-
-function useTags(n: number): [Tag[], boolean] {
-  const [tags, setTags] = useState<Tag[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const serverLocation = useRecoilValue(serverLocationAtom);
-  const navigate = useNavigate();
-
-  const getData = async () => {
-    try {
-      const result = await axios.get(`${serverLocation}/tag/tags`, {
-        headers: {
-          "Authorization": localStorage.getItem("Authorization"),
-        },
-      });
-      setTags(result.data.tags);
-    } catch (error) {
-      console.error("Failed to fetch data", error);
-      localStorage.clear();
-      navigate("/signuporsignin");
-      return;
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    const value = setInterval(() => {
-      getData();
-    }, n * 1000);
-
-    getData();
-
-    return () => {
-      clearInterval(value);
-    };
-  }, [n]);
-
-  return [tags, loading];
-}
+import { useNavigate } from "react-router-dom";
+import { Tag } from "../../interfaces/interface";
 
 export const TagsNavbar = () => {
-  const [tags, tagsLoading] = useTags(60);
-
-  let tagsContent;
-
+  const navigate = useNavigate()
+  const tempTags = useRecoilValueLoadable(tagsAtom);
+  const tags = tempTags.contents.tags as Tag[]
   const [currentTag, setCurrentTag] = useRecoilState(currentTagAtom);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -88,9 +47,20 @@ export const TagsNavbar = () => {
     }
   };
 
-  if (tagsLoading) {
+  let tagsContent;
+
+  if (tempTags.state === "loading") {
     tagsContent = <div className="flex justify-center items-center w-full"><ReactLoading type="balls" color="#000000" /></div>;
-  } else {
+  }
+
+  else if (tempTags.state === "hasError") {
+    console.log("error")
+    localStorage.clear()
+    navigate("/signuporsignin")
+    return null
+  }
+
+  else if (tempTags.state === "hasValue") {
     tagsContent = (
       <div className="px-4 mb-2 md:px-6 py-2 overflow-x-hidden flex justify-between">
         <button
@@ -101,7 +71,7 @@ export const TagsNavbar = () => {
 
         <div ref={scrollRef} className="flex gap-6 md:gap-10 overflow-x-hidden">
           <div className={`whitespace-nowrap cursor-pointer ${currentTag === "" ? "font-extrabold" : ""}`} onClick={() => {
-            if(!isSubmitting) { handleTagChange("") }
+            if (!isSubmitting) { handleTagChange("") }
           }}>For you</div>
           {tags.map((element) => {
             return (<div key={element.id} className={`whitespace-nowrap cursor-pointer ${currentTag === element.name ? "font-extrabold" : ""}`} onClick={() => {

@@ -16,9 +16,21 @@ export const isSubmittingAtom = atom({
     default: false
 })
 
-export const tagsAtom = atom({
-    key: "tagsAtom",
-    default: [[], false]
+export const tagsAtom = selector({
+    key: "tagsAtomSelector",
+    get: async ({get}) => {
+        const serverLocation = get(serverLocationAtom)
+        try {
+            const result = await axios.get(`${serverLocation}/tag/tags`, {
+                headers: {
+                    "Authorization": localStorage.getItem("Authorization")
+                },
+            })
+            return result.data
+        } catch (error) {
+            throw error
+        }
+    }
 })
 
 export const blogsSelector = selector({
@@ -40,3 +52,13 @@ export const blogsSelector = selector({
         }
     },
 });
+
+export const isUploadableBlogAtom = atom({
+    key: "isUploadableBlogAtom",
+    default: false
+})
+
+export const publishBlogAtom = atom({
+    key: "publishBlogAtom",
+    default: false
+})

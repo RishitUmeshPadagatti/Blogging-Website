@@ -1,6 +1,6 @@
 import { signUpParams, signUpSchema } from "@rishit1275/blogging-website-package"
 import { useRef, useState } from "react"
-import { errorToast } from "./ToastComponents"
+import { errorToast } from "../ToastComponents"
 import axios from "axios"
 import { useRecoilValue } from "recoil"
 import { serverLocationAtom } from "../../atom/atoms"
@@ -37,12 +37,12 @@ export default function SignUpSection({ toggleForm }: { toggleForm: () => void }
         try {
             const result = await axios.post(`${serverLocation}/user/signup`, receivedSignUpInput)
             localStorage.setItem("Authorization", `Bearer ${result.data.token}`);
-            console.log(result.data.user)
             localStorage.setItem("UserDetails", JSON.stringify({
                 id: result.data.user.id,
                 name: result.data.user.name,
                 email: result.data.user.email
             }))
+            localStorage.setItem("serverLocation", serverLocation)
             setIsSubmitting(false)
             navigate("/")
         } catch (error) {

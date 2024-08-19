@@ -29,7 +29,8 @@ export interface CapsuleProps {
 }
 
 export interface AvatarProps {
-    initials: string;
+    initials: string,
+    size: number
 }
 
 export interface TagsNavbarProps {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import SignUpSection from "../components/SignupAndSignin/SignUpSection";
 import SignInSection from "../components/SignupAndSignin/SignInSection";
 import RandomQuote from "../components/SignupAndSignin/RandomQuote";
-import { SetToastContainer } from "../components/SignupAndSignin/ToastComponents";
+import { SetToastContainer } from "../components/ToastComponents";
 
 export default function SignInAndSignUp() {
     const [isSignUpActive, setIsSignUpActive] = useState(true)

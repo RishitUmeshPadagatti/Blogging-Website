@@ -24,7 +24,13 @@ const selectingStuff = {
     }
 }
 
-createBlogSchema
+const isValidTags = (tags: string[]): boolean => {
+    const areSingleWords = tags.every(tag => tag.split(" ").length === 1);
+    const hasUniqueTags = new Set(tags).size === tags.length;
+
+    return areSingleWords && hasUniqueTags;
+};
+
 // Creating a blog
 export async function creatingBlog(c: Context) {
     try {
@@ -33,6 +39,12 @@ export async function creatingBlog(c: Context) {
         const parsingResult = createBlogSchema.safeParse(body)
         if (!parsingResult.success) {
             return c.json({ msg: parsingResult.error.errors[0].message, success: false }, ResponseCode.badRequest)
+        }
+
+        // checks if the tags are single words and aren't repeated
+        const parsingResult2 = isValidTags(body.tags)
+        if (!parsingResult2) {
+            return c.json({ msg: "Tags should be single, unique words", success: false }, ResponseCode.badRequest);
         }
 
         const prisma = new PrismaClient({
@@ -88,6 +100,12 @@ export async function updatingBlog(c: Context) {
         const parsingResult = createBlogSchema.safeParse(body)
         if (!parsingResult.success) {
             return c.json({ msg: parsingResult.error.errors[0].message, success: false }, ResponseCode.badRequest)
+        }
+
+        // checks if the tags are single words and aren't repeated
+        const parsingResult2 = isValidTags(body.tags)
+        if (!parsingResult2) {
+            return c.json({ msg: "Tags should be single, unique words", success: false }, ResponseCode.badRequest);
         }
 
         await prisma.blog.update({
@@ -287,7 +305,7 @@ export async function deleteABlog(c: Context) {
             await prisma.tag.deleteMany({
                 where: {
                     blogs: {
-                        none: {}, 
+                        none: {},
                     },
                 },
             });

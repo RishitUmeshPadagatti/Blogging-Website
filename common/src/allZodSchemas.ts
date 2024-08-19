@@ -27,8 +27,9 @@ export const createBlogSchema = z.object({
         .min(5, "Content should be at least 5 characters long"),
     tags: z.array(z.string()
         .min(1, "Tag cannot be empty")
-        .regex(/^\w+$/, "Each tag must be a single word without spaces"))
+        .regex(/^[\w-]+$/, "Each tag must be a single word with letters, numbers, or hyphens"))
         .max(10, "You can specify at most 10 tags")
+        .refine(tags => tags.length > 0, "At least one tag is required")
 });
 export type blogParams = z.infer<typeof createBlogSchema>
 

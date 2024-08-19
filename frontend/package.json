@@ -10,16 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@rishit1275/blogging-website-package": "^1.0.4",
+    "@rishit1275/blogging-website-package": "^1.0.5",
     "axios": "^1.7.3",
     "jsonwebtoken": "^9.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
     "react-loading": "^2.0.3",
     "react-router-dom": "^6.26.0",
     "react-toastify": "^10.0.5",
     "recoil": "^0.7.7",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",

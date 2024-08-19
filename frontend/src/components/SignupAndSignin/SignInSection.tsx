@@ -1,6 +1,6 @@
 import { signInParams, signInSchema } from "@rishit1275/blogging-website-package"
 import { useRef, useState } from "react"
-import { errorToast } from "./ToastComponents"
+import { errorToast } from "../ToastComponents"
 import axios from "axios"
 import { useRecoilValue } from "recoil"
 import { serverLocationAtom } from "../../atom/atoms"
@@ -39,6 +39,7 @@ export default function SignInSection({ toggleForm }: { toggleForm: () => void }
                 name: result.data.user.name,
                 email: result.data.user.email
             }))
+            localStorage.setItem("serverLocation", serverLocation)
             setIsSubmitting(false)
             navigate("/")
         } catch (error) {
