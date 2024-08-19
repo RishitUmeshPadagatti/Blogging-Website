@@ -24,6 +24,13 @@ export interface Blog {
     tags: Tag[];
 }
 
+export interface ServerUserResponse {
+    id: string,
+    name: string,
+    email: string,
+    posts: Blog[]
+}
+
 export interface CapsuleProps {
     name: string
 }

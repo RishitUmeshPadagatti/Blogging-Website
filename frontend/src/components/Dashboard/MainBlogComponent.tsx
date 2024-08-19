@@ -1,7 +1,6 @@
 import { profileInitials } from "../../functions/profileInitials";
-import { Blog, BlogComponentProps, Tag } from "../../interfaces/interface"
+import { Blog } from "../../interfaces/interface"
 import { CapsuleProps } from "../../interfaces/interface";
-import { v4 as uuidv4 } from "uuid";
 import { formatDate } from "../../functions/formatDate";
 import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { blogsSelector, currentTagAtom, isSubmittingAtom } from "../../atom/atoms";
@@ -34,17 +33,17 @@ export const MainBlogComponent = () => {
                 {blogs.map((element: Blog) => {
                     return (
                         <div key={element.id} className="flex gap-2 md:gap-6 rounded px-3 py-2 ">
-                            <div>
+                            <div onClick={() => navigate(`/profile/${element.authorId}`)}>
                                 <Avatar initials={profileInitials(element.author.name)} size={40} />
                             </div>
                             <div className="space-y-2 md:space-y-3">
-                                <p className="text-sm font-medium hover:underline cursor-pointer">{element.author.name}</p>
+                                <p onClick={() => navigate(`/profile/${element.authorId}`)} className="text-sm font-medium hover:underline cursor-pointer">{element.author.name}</p>
                                 <h2 onClick={() => navigate(`/view/${element.id}`)} className="text-xl max-h-[80px] font-bold hover:underline cursor-pointer">{element.title}</h2>
-                                <p className=" max-h-[100px] overflow-hidden text-gray-500 cursor-default">{element.content}</p>
+                                <p className=" max-h-[100px] overflow-hidden text-gray-500 cursor-default font-serif">{element.content}</p>
                                 <div className="flex items-center gap-2 md:gap-4 text-sm text-gray-500 cursor-default flex-wrap">
                                     <div>{formatDate(element.created)}</div>
                                     {element.tags.map((element) => {
-                                        return <Capsule key={uuidv4()} name={element.name} />
+                                        return <Capsule key={element.name} name={element.name} />
                                     })}
                                 </div>
                             </div>

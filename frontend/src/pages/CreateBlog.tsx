@@ -1,7 +1,7 @@
 import { Editor } from "../components/CreateBlog/Editor"
 import { Navbar } from "../components/Navbar"
 
-export default function Blog(){
+export default function CreateBlog(){
     return (
         <div>
             <Navbar/>

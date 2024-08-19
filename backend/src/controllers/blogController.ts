@@ -249,6 +249,7 @@ export async function unPublishABlog(c: Context) {
 export async function getABlog(c: Context) {
     try {
         const requestId = c.req.param("id")
+        const userId = c.get("authorId")
 
         const prisma = new PrismaClient({
             datasourceUrl: c.env.DATABASE_URL,
@@ -257,8 +258,16 @@ export async function getABlog(c: Context) {
         const result = await prisma.blog.findFirst({
             where: {
                 id: requestId,
-                published: true
-            }, select: selectingStuff
+                OR: [
+                    {
+                        published: true
+                    },
+                    {
+                        authorId: userId
+                    }
+                ]
+            }, 
+            select: selectingStuff
         })
 
         if (!result) {

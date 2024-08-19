@@ -12,12 +12,10 @@ export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate()
-    const isInCreateBlog = useLocation().pathname == "/blog" ? true : false
+    const isInCreateBlog = useLocation().pathname == "/create-blog" ? true : false
+    const isInUpdateBlog = useLocation().pathname == "/update-blog" ? true : false
     const isUploadableBlog: boolean = useRecoilValue(isUploadableBlogAtom)
     const setPublishBlog = useSetRecoilState(publishBlogAtom)
-
-    // const userInitials = profileInitials(JSON.parse(userDetailsLocalStorage).name)
-    // console.log(userInitials)
 
     useEffect(() => {
         if (!localStorage.getItem("UserDetails")) {
@@ -47,17 +45,17 @@ export const Navbar = () => {
         <nav className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
             <img className="md:w-[100px] w-[75px] cursor-pointer" src={mediumLogo} alt="Medium Logo" onClick={() => navigate("/")} />
 
-            {isInCreateBlog && <IconsNavbar />}
+            {(isInCreateBlog || isInUpdateBlog) && <IconsNavbar />}
 
             <div className="flex items-center ml-auto gap-2">
-                {!isInCreateBlog && <button className="p-2 rounded-full" onClick={() => {
-                    navigate("/blog")
+                {!isInCreateBlog && !isInUpdateBlog && <button className="p-2 rounded-full" onClick={() => {
+                    navigate("/create-blog")
                 }}>
                     <PenIcon className="h-5 w-5" />
                     <span className="sr-only">Write</span>
                 </button>}
 
-                {isInCreateBlog && <button onClick={() => {
+                {(isInCreateBlog || isInUpdateBlog) && <button onClick={() => {
                     if (isUploadableBlog) setPublishBlog(true)
                 }} className={`${isUploadableBlog ? "cursor-pointer" : "cursor-not-allowed bg-green-700"} bg-green-600 hover:bg-green-700 font-light text-sm md:text-base text-white px-2 md:px-3 py-[1px] rounded-2xl`}>
                     Publish
@@ -71,7 +69,7 @@ export const Navbar = () => {
                         <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-10">
                             <ul>
                                 <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={() => {
-                                    console.log("TODO")
+                                    navigate(`/profile/me`)
                                 }}>Profile</li>
                                 <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={() => {
                                     localStorage.clear()

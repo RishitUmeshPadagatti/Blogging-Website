@@ -19,7 +19,7 @@ const debounce = (func: Function, delay: number) => {
         }, delay);
     };
 };
-const debouncedTime = 2
+const debouncedTime = 5
 
 const createBlog = async (object: blogParams) => {
     const serverLocation = localStorage.getItem("serverLocation")
@@ -112,7 +112,7 @@ export const Editor: React.FC<{ blogId?: string, titleContent?: string, blogCont
                     console.log(JSON.stringify(error));
                 })
                 .finally(() => {
-                    setPublishBlog(false); // 5. Reset publishBlog state to avoid re-triggering
+                    setPublishBlog(false);
                 });
         }
     }, [publishBlog]);

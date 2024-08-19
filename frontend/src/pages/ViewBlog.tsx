@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Navbar } from "../components/Navbar"
 import React, { useEffect, useState } from "react"
 import { Avatar } from "../components/Avatar"
@@ -9,6 +9,7 @@ import { serverLocationAtom } from "../atom/atoms"
 import ReactLoading from 'react-loading'
 import { Blog } from "../interfaces/interface"
 import { formatDate } from "../functions/formatDate"
+import { ErrorPage } from "../components/ErrorPage"
 
 function useBlogInformation(blogId: string) {
     const [blog, setBlog] = useState([])
@@ -36,6 +37,8 @@ function useBlogInformation(blogId: string) {
 }
 
 export default function ViewBlog() {
+    const navigate = useNavigate()
+    
     const blogId = useParams().blogId
 
     const [blogInformation, loading, success] = useBlogInformation(blogId || "") as [Blog, boolean, boolean]
@@ -50,7 +53,7 @@ export default function ViewBlog() {
 
     else if (!loading && !success) {
         viewContent = (<div>
-            Error
+            <ErrorPage/>
         </div>)
     }
 
@@ -62,11 +65,11 @@ export default function ViewBlog() {
                     </div>
 
                     <div className="mt-5 flex gap-3 items-center">
-                        <div>
+                        <div onClick={() => navigate(`/profile/${blogInformation.authorId}`)}>
                             <Avatar initials={profileInitials(blogInformation.author.name)} size={47} />
                         </div>
                         <div>
-                            <div className="cursor-pointer hover:underline font-medium">{blogInformation.author.name}</div>
+                            <div onClick={() => navigate(`/profile/${blogInformation.authorId}`)} className="cursor-pointer hover:underline font-medium">{blogInformation.author.name}</div>
                             <div className="cursor-default text-gray-500 text-sm">{formatDate(blogInformation.created)}</div>
                         </div>
                     </div>

@@ -20,7 +20,7 @@ export async function authMiddleware(c: Context, next: Next){
             return c.json({msg: "Improper Inputs", success: false}, ResponseCode.forbidden)
         }
     } catch (error) {
-        console.log(error)
+        console.log("Error: ", error)
         return c.json({ msg: "Internal Server Error", success: false }, ResponseCode.internalServerError)
     }
     
