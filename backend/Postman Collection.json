@@ -1,0 +1,510 @@
+{
+	"info": {
+		"_postman_id": "e6df4475-da58-43e4-aade-dedb77515a27",
+		"name": "Blogging website",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33595799"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "/api/v1/user/signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Taylor Brown\",\n    \"password\": \"taylor_brown\",\n    \"email\": \"taylor_brown@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{location}}/api/v1/user/signup",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/signin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"alex_johnson@gmail.com\",\n    \"password\": \"alex_johnson\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{location}}/api/v1/user/signin",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/user/getblogs/:authorId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{john_doe_auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{location}}/api/v1/user/getblogs/:authorId",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"getblogs",
+								":authorId"
+							],
+							"variable": [
+								{
+									"key": "authorId",
+									"value": "e9535bd8-6932-4202-8af2-e9eae7bfeae"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "blog",
+			"item": [
+				{
+					"name": "/api/v1/blog",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{john_doe_auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"How AI is Revolutionizing Healthcare\",\n    \"content\": \"An in-depth look at how artificial intelligence is improving patient care, diagnostic processes, and healthcare management.\",\n    \"tags\": []\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{location}}/api/v1/blog",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"blog"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/blog/:id",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jane_smith_auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"How AI and ML is Revolutionizing Healthcare\",\n    \"content\": \"An in-depth look at how artificial intelligence is improving patient care, diagnostic processes, and healthcare management.\",\n    \"tags\": [\"AI\", \"Health\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{location}}/api/v1/blog/:id",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"blog",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4a50bcb1-97e9-4173-bfee-fa4f543cc119"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/blog/bulk",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{alex_johnson_auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{location}}/api/v1/blog/bulk",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"blog",
+								"bulk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/blog/publish/:id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{john_doe_auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{location}}/api/v1/blog/publish/:id",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"blog",
+								"publish",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "164bb7bf-787e-4a39-87d6-d266ecee592a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/blog/unpublish/:id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jane_smith_auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"How AI is Revolutionizing Healthcare\",\n    \"content\": \"An in-depth look at how artificial intelligence is improving patient care, diagnostic processes, and healthcare management.\",\n    \"tags\": [\"AI\", \"Health\", \"Technology\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{location}}/api/v1/blog/unpublish/:id",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"blog",
+								"unpublish",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4a50bcb1-97e9-4173-bfee-fa4f543cc119"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/blog/:id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jane_smith_auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{location}}/api/v1/blog/:id",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"blog",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c0398b22-2d92-4392-91bb-6ff722e05e10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/blog/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{john_doe_auth}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{location}}/api/v1/blog/:id",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"blog",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "bb8d7f12-a3f1-4376-a403-0281aebde41d"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tag",
+			"item": [
+				{
+					"name": "/api/v1/tag/getblogs/:tagname",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{john_doe_auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{location}}/api/v1/tag/getblogs/:tagname",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tag",
+								"getblogs",
+								":tagname"
+							],
+							"variable": [
+								{
+									"key": "tagname",
+									"value": "AI"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/tag/tags",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{john_doe_auth}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{location}}/api/v1/tag/tags",
+							"host": [
+								"{{location}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tag",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "location",
+			"value": "http://localhost:8787"
+		},
+		{
+			"key": "local_location",
+			"value": "http://localhost:8787",
+			"type": "string"
+		},
+		{
+			"key": "john_doe_auth",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "jane_smith_auth",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "alex_johnson_auth",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "taylor_brown_auth",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
