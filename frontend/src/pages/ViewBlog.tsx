@@ -82,7 +82,7 @@ export default function ViewBlog() {
                         </ul>
                     </div>
 
-                    <div className="my-8 w-full text-xl font-serif flex-wrap cursor-default leading-9">
+                    <div className="my-8 w-full text-xl font-serif flex-wrap cursor-default leading-9 first-letter:capitalize first-letter:text-2xl">
                         {blogInformation.content}
                     </div>
                 </div>

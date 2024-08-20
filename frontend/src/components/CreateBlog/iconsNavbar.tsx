@@ -1,5 +1,4 @@
 import { IoIosCloudDone } from "react-icons/io";
-import { VscCloudUpload } from "react-icons/vsc";
 import { useRecoilValue } from "recoil";
 import { isUploadableBlogAtom } from "../../atom/atoms";
 
