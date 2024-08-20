@@ -44,7 +44,7 @@ export default function SignUpSection({ toggleForm }: { toggleForm: () => void }
             }))
             localStorage.setItem("serverLocation", serverLocation)
             setIsSubmitting(false)
-            navigate("/")
+            navigate("/dashboard")
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
                 errorToast(error.response.data.msg)

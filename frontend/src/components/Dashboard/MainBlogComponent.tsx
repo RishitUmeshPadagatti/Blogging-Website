@@ -21,7 +21,7 @@ export const MainBlogComponent = () => {
     else if (blogsTemp.state === "hasError") {
         console.log("error")
         localStorage.clear()
-        navigate("/signuporsignin")
+        navigate("/")
         return null;
     }
 

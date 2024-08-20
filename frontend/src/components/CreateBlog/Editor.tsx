@@ -19,7 +19,7 @@ const debounce = (func: Function, delay: number) => {
         }, delay);
     };
 };
-const debouncedTime = 5
+const debouncedTime = 2.5
 
 const createBlog = async (object: blogParams) => {
     const serverLocation = localStorage.getItem("serverLocation")
@@ -106,7 +106,7 @@ export const Editor: React.FC<{ blogId?: string, titleContent?: string, blogCont
             const object = { title: title, content: blog, tags: tags };
             publishBlogServer(object)
                 .then(() => {
-                    navigate("/");
+                    navigate("/dashboard");
                 })
                 .catch((error) => {
                     console.log(JSON.stringify(error));

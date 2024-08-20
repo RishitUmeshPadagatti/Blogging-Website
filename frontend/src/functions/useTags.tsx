@@ -22,7 +22,7 @@ export function useTags(n: number): [Tag[], boolean] {
         } catch (error) {
             console.error("Failed to fetch data", error);
             localStorage.clear();
-            navigate("/signuporsignin");
+            navigate("/");
             return;
         } finally {
             setLoading(false);

@@ -23,8 +23,10 @@ function App() {
     <RecoilRoot>
       <BrowserRouter basename='/'>
         <Routes>
-          <Route path='/' element={<Suspense fallback={<LoadingPage />}><Dashboard /></Suspense>} />
-          <Route path='/signuporsignin' element={<Suspense fallback={<LoadingPage />}><SignInAndSignUp /></Suspense>} />
+          <Route path='/' element={<Suspense fallback={<LoadingPage />}><SignInAndSignUp /></Suspense>} />
+          <Route path='/dashboard' element={<Suspense fallback={<LoadingPage />}><Dashboard /></Suspense>} />
+          {/* <Route path='/' element={<Suspense fallback={<LoadingPage />}><Dashboard /></Suspense>} />
+          <Route path='/signuporsignin' element={<Suspense fallback={<LoadingPage />}><SignInAndSignUp /></Suspense>} /> */}
           <Route path='/create-blog' element={<Suspense fallback={<LoadingPage />}><CreateBlog /></Suspense>} />
           <Route path='/update-blog' element={<Suspense fallback={<LoadingPage />}><UpdateBlog /></Suspense>} />
           <Route path='/view/:blogId' element={<Suspense fallback={<LoadingPage />}><ViewBlog /></Suspense>} />

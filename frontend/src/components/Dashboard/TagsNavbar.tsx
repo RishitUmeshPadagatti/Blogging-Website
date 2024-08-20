@@ -56,7 +56,7 @@ export const TagsNavbar = () => {
   else if (tempTags.state === "hasError") {
     console.log("error")
     localStorage.clear()
-    navigate("/signuporsignin")
+    navigate("/")
     return null
   }
 

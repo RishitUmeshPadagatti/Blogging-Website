@@ -20,7 +20,7 @@ export const Navbar = () => {
     useEffect(() => {
         if (!localStorage.getItem("UserDetails")) {
             localStorage.clear()
-            navigate("/signuporsignin")
+            navigate("/")
         }
     }, [])
 
@@ -43,7 +43,7 @@ export const Navbar = () => {
 
     return (
         <nav className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
-            <img className="md:w-[100px] w-[75px] cursor-pointer" src={mediumLogo} alt="Medium Logo" onClick={() => navigate("/")} />
+            <img className="md:w-[100px] w-[75px] cursor-pointer" src={mediumLogo} alt="Medium Logo" onClick={() => navigate("/dashboard")} />
 
             {(isInCreateBlog || isInUpdateBlog) && <IconsNavbar />}
 
@@ -73,7 +73,7 @@ export const Navbar = () => {
                                 }}>Profile</li>
                                 <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" onClick={() => {
                                     localStorage.clear()
-                                    navigate("/signuporsignin")
+                                    navigate("/")
                                 }}>Logout</li>
                             </ul>
                         </div>

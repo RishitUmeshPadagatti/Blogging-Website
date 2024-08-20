@@ -79,7 +79,7 @@ export default function ProfileView() {
                 <div className="text-3xl md:text-5xl font-semibold cursor-default">{userInformation.name}</div>
             </div>
             <div>
-                {userInformation.posts.map((element: Blog) => {
+                {userInformation.posts.length==0 ? <div className="w-full h-[50vh] flex justify-center items-center cursor-default text-4xl font-serif ">No Blogs</div> : userInformation.posts.map((element: Blog) => {
                     return (
                         <div key={element.id} className="flex flex-col space-y-2 md:space-y-3 border rounded-xl m-2 md:m-7 px-4 md:px-5 py-5 md:py-7">
                             <div className="flex md:justify-between flex-col lg:flex-row gap-5">
@@ -93,7 +93,7 @@ export default function ProfileView() {
                                                 className="border rounded-lg px-3.5 py-0.5 font-semibold"
                                                 onClick={() => {
                                                     localStorage.setItem("updateBlogId", element.id)
-                                                    navigate('/update-blog')
+                                                    navigate("/update-blog")
                                                 }}
                                             >
                                                 Edit
